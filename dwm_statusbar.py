@@ -89,11 +89,36 @@ def mpd_status() -> str:
 
     return current_song
 # }}}
+# def xbacklight_status() -> str: {{{
+def xbacklight_status() -> str:
+    try:
+        percentage = subprocess.run(["xbacklight"],
+                                stdout=subprocess.PIPE,
+                                check=True).stdout.decode().strip()
+    except subprocess.CalledProcessError:
+        return ''
+
+    return percentage
+# }}}
+# def light_status() -> str: {{{
+def light_status() -> str:
+    try:
+        percentage = subprocess.run(["light"],
+                                stdout=subprocess.PIPE,
+                                check=True).stdout.decode().strip()
+    except subprocess.CalledProcessError:
+        return ''
+
+    return percentage
+# }}}
 # def func_xsetroot(output_funcs :str) -> str: {{{
 def func_xsetroot(output_funcs :str) -> str:
-    list_statusbar = list()
+    delimiter = u'\u2502'
+    #delimiter = '| '
 
+    list_statusbar = list()
     list_functions = output_funcs.split('_')
+
     for i in list_functions:
         if i == 'hm' or i == 'hms':
             list_statusbar.append(date_time(i))
@@ -105,8 +130,12 @@ def func_xsetroot(output_funcs :str) -> str:
             list_statusbar.append(audacious_status())
         elif i == 'mpd':
             list_statusbar.append(mpd_status())
+        elif i == 'xbacklight':
+            list_statusbar.append(xbacklight_status())
+        elif i == 'light':
+            list_statusbar.append(light_status())
 
-    statusbar = '| '.join(list_statusbar)
+    statusbar = delimiter.join(list_statusbar)
     #print(statusbar)
     subprocess.run(["xsetroot", "-name", statusbar])
 # }}}
@@ -114,7 +143,7 @@ def func_xsetroot(output_funcs :str) -> str:
 ### main routine
 if len(sys.argv) < 2:
     print('[Error] input $2, underbar delimited functions')
-    print('        ex. b_hms, c_b_hm, m_b_hms')
+    print('        ex. bat_hms, cpu_bat_hm, mpd_bat_hms')
     print('--function name--')
     print('hm  : date and time (yyyy-MM-dd HH:mm)')
     print('hms : date and time (yyyy-MM-dd HH:mm:ss)')
@@ -122,6 +151,8 @@ if len(sys.argv) < 2:
     print('cpu : cpu temperature')
     print('aud : Audacious status')
     print('mpd : MPD status')
+    print('xbacklight : screen brightness status using xbacklight')
+    print('light      : screen brightness status using light')
     quit()
 
 output_funcs = sys.argv[1]
