@@ -5,9 +5,14 @@ A dwm statusbar implemented in Python
 
 Install python-mpd2 and psutil.
 
-For example,
+Ubuntu
 ```bash
-$ sudo apt install python3 psutil python3-mpd
+$ sudo apt install python3-psutil python3-mpd
+```
+
+Arch
+```bash
+$ sudo pacman -S python-psutil python-mpd2
 ```
 
 ## Installation
