@@ -25,6 +25,13 @@ $ git clone https://github.com/tsugibayashi/dwm_statusbar.py.git
 $ cp -p dwm_statusbar.py/dwm_statusbar.py /usr/local/bin/
 ```
 
+Arch
+```bash
+$ git clone https://github.com/tsugibayashi/aur.git
+$ cd aur/dwm_statusbar.py/
+$ makepkg -si
+```
+
 ## How to use
 
 Edit $HOME/.xinitrc, $HOME/.xsession, or $HOME/.xprofile.
