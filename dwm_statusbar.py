@@ -92,24 +92,26 @@ def mpd_status() -> str:
 # def xbacklight_status() -> str: {{{
 def xbacklight_status() -> str:
     try:
-        percentage = subprocess.run(["xbacklight"],
+        percent_str = subprocess.run(["xbacklight"],
                                 stdout=subprocess.PIPE,
                                 check=True).stdout.decode().strip()
     except subprocess.CalledProcessError:
         return ''
 
-    return percentage
+    percentage = float(percent_str)
+    return str(round(percentage, 1))
 # }}}
 # def light_status() -> str: {{{
 def light_status() -> str:
     try:
-        percentage = subprocess.run(["light"],
+        percent_str = subprocess.run(["light"],
                                 stdout=subprocess.PIPE,
                                 check=True).stdout.decode().strip()
     except subprocess.CalledProcessError:
         return ''
 
-    return percentage
+    percentage = float(percent_str)
+    return str(round(percentage, 1))
 # }}}
 # def func_xsetroot(output_funcs :str) -> str: {{{
 def func_xsetroot(output_funcs :str) -> str:
