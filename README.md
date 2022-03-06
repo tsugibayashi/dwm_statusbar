@@ -6,7 +6,7 @@ A dwm statusbar implemented in Python
 Install python-mpd2 and psutil.
 
 For example,
-```Shell
+```bash
 $ sudo apt install python3 psutil python3-mpd
 ```
 
@@ -15,17 +15,17 @@ $ sudo apt install python3 psutil python3-mpd
 Install dwm_statusbar.py.
 
 For example,
-```Shell
+```bash
 $ git clone https://github.com/tsugibayashi/dwm_statusbar.py.git
 $ cp -p dwm_statusbar.py/dwm_statusbar.py /usr/local/bin/
 ```
 
 ## How to use
 
-Edit $HOME/.xsession or $HOME/.xprofile.
+Edit $HOME/.xinitrc, $HOME/.xsession, or $HOME/.xprofile.
 
 For example,
-```Shell
+```bash
 # Statubar loop for dwm
 while true; do
         /usr/local/bin/dwm_statusbar.py bat_hms    # battery and date(yyyy-MM-dd HH:mm:ss)
