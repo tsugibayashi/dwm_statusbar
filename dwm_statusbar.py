@@ -5,6 +5,7 @@ import datetime
 import subprocess
 import psutil
 from mpd import MPDClient
+import alsaaudio
 
 ### functions
 # def date_time(date_format :str) -> str: {{{
@@ -113,6 +114,13 @@ def light_status() -> str:
     percentage = float(percent_str)
     return str(round(percentage, 1))
 # }}}
+# def vol_percentage(control :str) -> str: {{{
+def vol_percentage(control :str) -> str:
+    m = alsaaudio.Mixer(control)
+    list_m = m.getvolume()
+
+    return ':'.join(map(str, list_m))
+# }}}
 # def func_xsetroot(output_funcs :str) -> str: {{{
 def func_xsetroot(output_funcs :str) -> str:
     delimiter = u'\u2502'
@@ -136,6 +144,8 @@ def func_xsetroot(output_funcs :str) -> str:
             list_statusbar.append(xbacklight_status())
         elif i == 'light':
             list_statusbar.append(light_status())
+        elif i == 'vol':
+            list_statusbar.append(vol_percentage('Master'))
 
     statusbar = delimiter.join(list_statusbar)
     #print(statusbar)
@@ -150,6 +160,7 @@ if len(sys.argv) < 2:
     print('hm  : date and time (yyyy-MM-dd HH:mm)')
     print('hms : date and time (yyyy-MM-dd HH:mm:ss)')
     print('bat : battery percentage')
+    print('vol : audio volume percentage')
     print('cpu : cpu temperature')
     print('aud : Audacious status')
     print('mpd : MPD status')
