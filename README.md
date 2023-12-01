@@ -3,11 +3,11 @@ A dwm statusbar implemented in Python
 
 ## Prerequisites
 
-Install python-mpd2 and psutil.
+Install python-mpd2, psutil, and python3-alsaaudio.
 
-Ubuntu
+Ubuntu and Debian
 ```bash
-$ sudo apt install python3-psutil python3-mpd
+$ sudo apt install python3-psutil python3-mpd python3-alsaaudio
 ```
 
 Arch
