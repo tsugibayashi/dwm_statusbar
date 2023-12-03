@@ -6,6 +6,7 @@ import subprocess
 import psutil
 from mpd import MPDClient
 import alsaaudio
+import time
 
 ### functions
 # def date_time(date_format :str) -> str: {{{
@@ -154,7 +155,7 @@ def func_xsetroot(output_funcs :str) -> str:
 
 ### main routine
 if len(sys.argv) < 2:
-    print('[Error] input $2, underbar delimited functions')
+    print('[Error] input $1, underbar delimited functions')
     print('        ex. bat_hms, cpu_bat_hm, mpd_bat_hms')
     print('--function name--')
     print('hm  : date and time (yyyy-MM-dd HH:mm)')
@@ -167,8 +168,14 @@ if len(sys.argv) < 2:
     print('xbacklight : screen brightness status using xbacklight')
     print('light      : screen brightness status using light')
     quit()
+elif len(sys.argv) < 3:
+    print('[Error] input $2, sleep seconds')
+    quit()
 
-output_funcs = sys.argv[1]
+output_funcs  = sys.argv[1]
+sleep_seconds = int(sys.argv[2])
 
-func_xsetroot(output_funcs) 
+while True:
+    func_xsetroot(output_funcs)
+    time.sleep(sleep_seconds)
 

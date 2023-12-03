@@ -38,17 +38,10 @@ Edit $HOME/.xinitrc, $HOME/.xsession, or $HOME/.xprofile.
 
 For example,
 ```bash
-# Statubar loop for dwm
-while true; do
-        /usr/local/bin/dwm_statusbar.py bat_hms    # battery and date(yyyy-MM-dd HH:mm:ss)
-        #/usr/local/bin/dwm_statusbar.py bat_cpu_hm     # battery, cpu, and date(yyyy-MM-dd HH:mm)
-        #/usr/local/bin/dwm_statusbar.py bat_cpu_hms    # battery, cpu, and date(yyyy-MM-dd HH:mm:ss)
-        #/usr/local/bin/dwm_statusbar.py mpd_bat_hms    # mpd status, battery, and date(yyyy-MM-dd HH:mm:ss)
-
-        sleep 1s    # Update every second
-        #sleep 5s    # Update every 5 seconds
-        #sleep 1m    # Update every minute
-done &
+/usr/local/bin/dwm_statusbar.py bat_hms 1 &  # battery and date(yyyy-MM-dd HH:mm:ss)
+#/usr/local/bin/dwm_statusbar.py bat_cpu_hm 1 &  # battery, cpu, and date(yyyy-MM-dd HH:mm)
+#/usr/local/bin/dwm_statusbar.py bat_cpu_hms 1 &  # battery, cpu, and date(yyyy-MM-dd HH:mm:ss)
+#/usr/local/bin/dwm_statusbar.py mpd_bat_hms 1 &  # mpd status, battery, and date(yyyy-MM-dd HH:mm:ss)
 
 # Window Manager
 /usr/bin/dwm
