@@ -1,9 +1,9 @@
-# dwm_statusbar.py
+# dwm_statusbar
 A dwm statusbar implemented in Python
 
 ## Prerequisites
 
-Install python-mpd2, psutil, and python3-alsaaudio.
+Install python3-psutil, python3-mpd, and python3-alsaaudio.
 
 Ubuntu and Debian
 ```bash
@@ -13,6 +13,7 @@ $ sudo apt install python3-psutil python3-mpd python3-alsaaudio
 Arch
 ```bash
 $ sudo pacman -S python-psutil python-mpd2
+$ yay -S python-pyalsaaudio
 ```
 
 ## Installation
