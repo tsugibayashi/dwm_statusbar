@@ -62,7 +62,10 @@ def audacious_status() -> str:
 def mpd_status() -> str:
     # Connects to local MPD server
     client = MPDClient()
-    client.connect("localhost", 6600)
+    try:
+        client.connect("localhost", 6600)
+    except:
+        return ''
     
     dict_status = client.status()
     if dict_status["state"] == "play":
@@ -117,8 +120,11 @@ def light_status() -> str:
 # }}}
 # def vol_percentage(control :str) -> str: {{{
 def vol_percentage(control :str) -> str:
-    m = alsaaudio.Mixer(control)
-    list_m = m.getvolume()
+    try:
+        m = alsaaudio.Mixer(control)
+        list_m = m.getvolume()
+    except:
+        return '-:-'
 
     return ':'.join(map(str, list_m))
 # }}}
