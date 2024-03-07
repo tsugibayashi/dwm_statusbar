@@ -1,5 +1,5 @@
 # dwmstatusbar
-A dwm statusbar implemented in Python
+A dwm statusbar implemented with Python
 
 ## Prerequisites
 
@@ -46,10 +46,10 @@ fi
 
 # execute dwmstatusbar.py
 date > $HOME/log/dwmstatusbar.log
-/usr/bin/dwmstatusbar.py bat_hms 1 >>$HOME/log/dwmstatusbar.log 2>&1 &  #battery and date(yyyy-MM-dd HH:mm:ss)
-#/usr/bin/dwmstatusbar.py bat_cpu_hm 1 &  #battery, cpu temp., and date(yyyy-MM-dd HH:mm)
-#/usr/bin/dwmstatusbar.py bat_cpu_hms 1 &  #battery, cpu temp., and date(yyyy-MM-dd HH:mm:ss)
-#/usr/bin/dwmstatusbar.py mpd_vol_light_bat_hms 1 &  #mpd status, audio volume, brightness, battery, and date(yyyy-MM-dd HH:mm:ss)
+/usr/bin/dwmstatusbar.py --comps bat hms --wait 1 >>$HOME/log/dwmstatusbar.log 2>&1 &  #battery and date(yyyy-MM-dd HH:mm:ss)
+#/usr/bin/dwmstatusbar.py --comps bat cpu hm --wait 1 &  #battery, cpu temp., and date(yyyy-MM-dd HH:mm)
+#/usr/bin/dwmstatusbar.py --comps bat cpu hms --wait 1 &  #battery, cpu temp., and date(yyyy-MM-dd HH:mm:ss)
+#/usr/bin/dwmstatusbar.py --comps mpd vol light bat hms --wait 1 &  #mpd status, audio volume, brightness, battery, and date(yyyy-MM-dd HH:mm:ss)
 
 # Window Manager
 /usr/bin/dwm

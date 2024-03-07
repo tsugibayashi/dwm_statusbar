@@ -3,12 +3,27 @@
 import sys
 import datetime
 import subprocess
+import time
+import argparse
 import psutil
 from mpd import MPDClient
 import alsaaudio
-import time
 
 ### functions
+# def output_component_names() -> None: {{{
+def output_component_names() -> None:
+    print('--- Available component names ---')
+    print('hm  : date and time (yyyy-MM-dd HH:mm)')
+    print('hms : date and time (yyyy-MM-dd HH:mm:ss)')
+    print('bat : battery percentage')
+    print('vol : audio volume percentage')
+    print('cpu : cpu temperature')
+    print('aud : Audacious status')
+    print('mpd : MPD status')
+    print('xbacklight : screen brightness status using xbacklight')
+    print('light      : screen brightness status using light')
+    return None
+# }}}
 # def date_time(date_format :str) -> str: {{{
 def date_time(date_format :str) -> str:
     today = datetime.datetime.now()
@@ -128,60 +143,54 @@ def vol_percentage(control :str) -> str:
 
     return ':'.join(map(str, list_m))
 # }}}
-# def func_xsetroot(output_funcs :str) -> str: {{{
-def func_xsetroot(output_funcs :str) -> str:
+# def output_status(components :list) -> str: {{{
+def output_status(components :list) -> str:
     delimiter = u'\u2502'
     #delimiter = '| '
-
     list_statusbar = list()
-    list_functions = output_funcs.split('_')
 
-    for i in list_functions:
-        if i == 'hm' or i == 'hms':
-            list_statusbar.append(date_time(i))
-        elif i == 'bat':
+    for comp in components:
+        if comp == 'hm' or comp == 'hms':
+            list_statusbar.append(date_time(comp))
+        elif comp == 'bat':
             list_statusbar.append(battery_percentage())
-        elif i == 'cpu':
+        elif comp == 'cpu':
             list_statusbar.append(cpu_temperature())
-        elif i == 'aud':
+        elif comp == 'aud':
             list_statusbar.append(audacious_status())
-        elif i == 'mpd':
+        elif comp == 'mpd':
             list_statusbar.append(mpd_status())
-        elif i == 'xbacklight':
+        elif comp == 'xbacklight':
             list_statusbar.append(xbacklight_status())
-        elif i == 'light':
+        elif comp == 'light':
             list_statusbar.append(light_status())
-        elif i == 'vol':
+        elif comp == 'vol':
             list_statusbar.append(vol_percentage('Master'))
 
     statusbar = delimiter.join(list_statusbar)
     #print(statusbar)
-    subprocess.run(["xsetroot", "-name", statusbar])
+
+    return statusbar
 # }}}
 
 ### main routine
-if len(sys.argv) < 2:
-    print('[Error] input $1, underbar delimited functions')
-    print('        ex. bat_hms, cpu_bat_hm, mpd_bat_hms')
-    print('--function name--')
-    print('hm  : date and time (yyyy-MM-dd HH:mm)')
-    print('hms : date and time (yyyy-MM-dd HH:mm:ss)')
-    print('bat : battery percentage')
-    print('vol : audio volume percentage')
-    print('cpu : cpu temperature')
-    print('aud : Audacious status')
-    print('mpd : MPD status')
-    print('xbacklight : screen brightness status using xbacklight')
-    print('light      : screen brightness status using light')
-    quit()
-elif len(sys.argv) < 3:
-    print('[Error] input $2, sleep seconds')
-    quit()
+parser = argparse.ArgumentParser()
+parser.add_argument('--comps', type=str, required=True, nargs="+", help='a list of component names')
+parser.add_argument('--wait', type=int, required=True, help='sleep seconds')
+args = parser.parse_args()
+#print(args.comps)
+#print(args.wait)
+#print(type(args.wait))
 
-output_funcs  = sys.argv[1]
-sleep_seconds = int(sys.argv[2])
+# Check specified component names
+for comp in args.comps:
+    if comp not in ['hm', 'hms', 'bat', 'vol', 'cpu', 'aud', 'xbacklight', 'light']:
+        print('[Error] unrecognized component name:', comp)
+        output_component_names()
+        quit()
 
 while True:
-    func_xsetroot(output_funcs)
-    time.sleep(sleep_seconds)
+    statusbar = output_status(args.comps)
+    subprocess.run(["xsetroot", "-name", statusbar])
+    time.sleep(args.wait)
 
