@@ -3,18 +3,13 @@ A dwm statusbar implemented with Python
 
 ## Prerequisites
 
-Install python3-psutil, python3-mpd, and python3-alsaaudio.
+Install packages if you use components bat, mpd, or vol.
 
-Ubuntu and Debian
-```bash
-$ sudo apt install python3-psutil python3-mpd python3-alsaaudio
-```
-
-Arch
-```bash
-$ sudo pacman -S python-psutil python-mpd2
-$ yay -S python-pyalsaaudio
-```
+| Component | Required package (Ubuntu and Debian) | Required package (Arch) |
+----|----|----
+| bat | python3-psutil | python-psutil |
+| mpd | python3-mpd | python-mpd2 |
+| vol | python3-alsaaudio | python-pyalsaaudio |
 
 ## Installation
 
@@ -54,4 +49,20 @@ date > $HOME/log/dwmstatusbar.log
 # Window Manager
 /usr/bin/dwm
 ```
+
+### Component name
+
+| Component | Description |
+----|----
+| hm | Date and time in '%F %R'. |
+| hms | Date and time in '%F %T'. |
+| bat | Battery percentage. This component uses python3-psutil. |
+| upower | Battery percentage. This component uses upower. |
+| vol | Audio volume. This component uses python3-alsaaudio. |
+| amixer | Audio volume. This component uses amixer. |
+| cpu | Cpu temperature. |
+| aud | Audacious status. This component uses audtool. |
+| mpd | MPD status. This component uses python3-mpd. |
+| xbacklight | Backlight status. This component uses xbacklight. |
+| light | Backlight status. This component uses light. |
 
