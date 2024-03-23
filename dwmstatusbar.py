@@ -194,7 +194,8 @@ def mpd_status_2() -> str:
 # def xbacklight_status() -> str: {{{
 def xbacklight_status() -> str:
     try:
-        percent_str = subprocess.run(["xbacklight"],
+        #percent_str = subprocess.run(["xbacklight"],
+        percent_str = subprocess.run(["xbacklight", "-get"],
                                 stdout=subprocess.PIPE,
                                 check=True).stdout.decode().strip()
     except subprocess.CalledProcessError:
