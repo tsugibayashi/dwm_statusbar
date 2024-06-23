@@ -257,6 +257,10 @@ def vol_percentage_2(control :str) -> str:
         elif 'Front Right:' in line:
             #print(line)
             right_vol = get_vol(line)
+        elif 'Mono:' in line:
+            left_vol = get_vol(line)
+            right_vol = left_vol
+            break
 
     return left_vol + ':' + right_vol
 # }}}
