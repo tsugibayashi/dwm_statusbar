@@ -157,7 +157,10 @@ def mpd_status() -> str:
         min_duration, sec_duration = divmod(duration, 60)
     
         artist = dict_currentsong["artist"]
-        title  = dict_currentsong["title"]
+        try:
+            title  = dict_currentsong["title"]
+        except KeyError:
+            title = ''
     
         current_song = artist + ' - ' + title + ' ' \
               + str(min_elapsed) + ':' + str(sec_elapsed).zfill(2) \
