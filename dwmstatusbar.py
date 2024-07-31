@@ -159,7 +159,7 @@ def mpd_status() -> str:
         try:
             artist = dict_currentsong["artist"]
         except KeyError:
-            title = ''
+            artist = ''
 
         try:
             title  = dict_currentsong["title"]
@@ -267,7 +267,7 @@ def vol_percentage_2(control :str) -> str:
         elif 'Mono:' in line:
             left_vol = get_vol(line)
             right_vol = left_vol
-            break
+            #break
 
     return left_vol + ':' + right_vol
 # }}}
