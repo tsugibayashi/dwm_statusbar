@@ -1,4 +1,6 @@
 # dwmstatusbar
+> ⚠️ This project has moved to [Codeberg](https://codeberg.org/tsugibayashi/pyoutput_status).
+
 A dwm statusbar implemented with Python
 
 ## Prerequisites
